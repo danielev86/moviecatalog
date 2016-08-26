@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 7-ago-2016 14.58.46 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping package="it.azienda">
+	<class name="it.azienda.progetto.hibernate.bean.impl.MovieImpl" table="movies" 
+	proxy="it.azienda.progetto.hibernate.bean.Movie"
+	catalog="moviecatalog"
+		optimistic-lock="version">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company"
+			class="it.azienda.progetto.hibernate.bean.impl.CompanyImpl" fetch="select">
+			<column name="company_id" not-null="true" />
+		</many-to-one>
+		<property name="title" type="string">
+			<column name="title" length="64" not-null="true" />
+		</property>
+		<property name="releaseDate" type="date">
+			<column name="release_date" length="10" />
+		</property>
+		<property name="plot" type="string">
+			<column name="plot" />
+		</property>
+		<property name="poster" type="string">
+			<column name="poster" length="64" />
+		</property>
+		<!-- <set name="moviesStarAssocsForIdFilm" table="movies_star_assoc" inverse="true" 
+			lazy="true" fetch="select"> <key> <column name="id_film" not-null="true" 
+			unique="true" /> </key> <one-to-many class="MoviesStarAssoc" /> </set> <set 
+			name="movieDirectorAssocs" table="movie_director_assoc" inverse="true" lazy="true" 
+			fetch="select"> <key> <column name="id_film" not-null="true" unique="true" 
+			/> </key> <one-to-many class="MovieDirectorAssoc" /> </set> <set name="filmGenresAssocs" 
+			table="film_genres_assoc" inverse="true" lazy="true" fetch="select"> <key> 
+			<column name="id_film" not-null="true" unique="true" /> </key> <one-to-many 
+			class="FilmGenresAssoc" /> </set> <set name="moviesStarAssocsForIdStar" table="movies_star_assoc" 
+			inverse="true" lazy="true" fetch="select"> <key> <column name="id_star" not-null="true" 
+			unique="true" /> </key> <one-to-many class="MoviesStarAssoc" /> </set> <set 
+			name="filmCountryAssocs" table="film_country_assoc" inverse="true" lazy="true" 
+			fetch="select"> <key> <column name="id_film" not-null="true" unique="true" 
+			/> </key> <one-to-many class="FilmCountryAssoc" /> </set> -->
+		<set name="ratings" table="ratings" inverse="true" lazy="true"
+			fetch="select">
+			<key>
+				<column name="movie_id" not-null="true" />
+			</key>
+			<one-to-many class="it.azienda.progetto.hibernate.bean.impl.RatingImpl" />
+		</set>
+
+		<set name="countries" table="film_country_assoc">
+			<key column="id_film" />
+			<many-to-many column="id_country"
+				class="it.azienda.progetto.hibernate.bean.impl.CountryImpl" />
+		</set>
+		<set name="genres" table="film_genres_assoc">
+			<key column="id_film"/>
+			<many-to-many column="id_genres" class="it.azienda.progetto.hibernate.bean.impl.GenreImpl"/>
+		</set>
+		<set name="directors" table="movie_director_assoc">
+			<key column="id_film"/>
+			<many-to-many class="it.azienda.progetto.hibernate.bean.impl.StarImpl" column="id_stars"/>		
+		</set>
+		<set name="actors" table="movies_star_assoc">
+			<key column="id_film"></key>
+			<many-to-many class="it.azienda.progetto.hibernate.bean.impl.StarImpl" column="id_star"> </many-to-many>
+		
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 7-ago-2016 14.58.46 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping package="it.azienda">
+	<class name="it.azienda.progetto.hibernate.bean.impl.StarImpl"
+		proxy="it.azienda.progetto.hibernate.bean.Star" table="stars" catalog="moviecatalog"
+		optimistic-lock="version">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+		<many-to-one name="country" class="it.azienda.progetto.hibernate.bean.impl.CountryImpl" fetch="select">
+			<column name="id_country" not-null="true" />
+		</many-to-one>
+		<property name="firstName" type="string">
+			<column name="first_name" length="32" not-null="true" />
+		</property>
+		<property name="lastName" type="string">
+			<column name="last_name" length="32" not-null="true" />
+		</property>
+		<property name="born" type="date">
+			<column name="born" length="10" />
+		</property>
+		<property name="biography" type="string">
+			<column name="biography" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+	<h:outputScript name="jquery-3.1.0.min.js" library="js" target="head"></h:outputScript>
+	<h:outputStylesheet name="style.css" library="css"></h:outputStylesheet>
+</h:head>
+<h:body>
+
+		<h:form>
+			<div>
+				<div id="header">
+
+					<table id="menuHeader" border="0" width="100%">
+						<tr>
+							<td width="50%" height="10%"></td>
+							<td width="50%" height="10%"><p:outputLabel
+									value="#{msg['header.select.country']}" /> <p:selectOneMenu 
+									value="#{langApplication.langSelected}">
+									<f:selectItems var="lang" value="#{langApplication.langs}"
+										itemLabel="#{lang.country}" itemValue="#{lang.isoCountryCode}">
+
+									</f:selectItems>
+
+								</p:selectOneMenu>
+								<p:commandButton
+									action="#{langApplication.changeLanguage}"
+									update="@form"
+									process="@form"
+									value="#{msg['header.refresh.country']}" 
+								/>
+								</td>
+						</tr>
+						<tr>
+							<td width="95%" height="20%">
+								<h1>
+									<h:outputText value="#{msg['header.title']}" />
+								</h1>
+							</td>
+							<td width="5%" height="20%"><p:commandLink
+									actionListener="#{menuBean.renderMenuHome()}"
+									action="#{menuBean.refreshMenu()}" process="@form"
+									update="@form">
+									<p:graphicImage
+										url="http://thehome-journal.com/wp-content/themes/hjbootstrap/images/menu_icon.svg" />
+
+								</p:commandLink></td>
+						</tr>
+					</table>
+					<!-- 
+				<div id="header_left"></div>
+				<div id="header_right"></div>
+				-->
+					<p:menubar id="menuHome" rendered="#{menuBean.showMenu}"
+						style="clear:both">
+						<p:menuitem value="#{msg['menu.nav.home']}" />
+
+
+						<p:submenu label="#{msg['menu.nav.movie']}">
+
+							<p:menuitem value="#{msg['menu.nav.movie.actor']}" url="#">
+							</p:menuitem>
+							<p:menuitem value="#{msg['menu.nav.movie.company']}" url="#">
+							</p:menuitem>
+							<p:menuitem value="#{msg['menu.nav.movie.genre']}" url="#">
+							</p:menuitem>
+
+						</p:submenu>
+						<p:submenu label="#{msg['menu.nav.series']}">
+							<p:menuitem value="#{msg['menu.nav.series.actor']}" url="#">
+							</p:menuitem>
+							<p:menuitem value="#{msg['menu.nav.series.company']}" url="#">
+							</p:menuitem>
+							<p:menuitem value="#{msg['menu.nav.series.genre']}" url="#">
+							</p:menuitem>
+						</p:submenu>
+						<p:submenu label="#{msg['menu.nav.aboutus']}">
+						</p:submenu>
+						<p:submenu label="#{msg['menu.nav.contact']}">
+						</p:submenu>
+
+					</p:menubar>
+
+				</div>
+			</div>
+		</h:form>
+
+
+
+
+		<div id="content">
+			<div id="content_left">Prova</div>
+			<div id="content_right">
+				<ui:include src="/faces/template/login.xhtml"></ui:include>
+			</div>
+
+		</div>
+		<div id="footer">
+			<p:outputLabel value="#{msg['footer.copyright']}" />
+		</div>
+
+</h:body>
+</html>

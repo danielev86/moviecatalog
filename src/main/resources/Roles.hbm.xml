@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 7-ago-2016 14.58.46 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping package="it.azienda">
+	<class name="it.azienda.progetto.hibernate.bean.impl.RoleImpl"
+		table="roles" proxy="it.azienda.progetto.hibernate.bean.Role" catalog="moviecatalog"
+		optimistic-lock="version">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+		<property name="role" type="string">
+			<column name="role" length="16" not-null="true" />
+		</property>
+		<set name="users" table="users" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="user_id" not-null="true" />
+			</key>
+			<one-to-many class="it.azienda.progetto.hibernate.bean.impl.UserImpl" />
+		</set>
+	</class>
+</hibernate-mapping>
