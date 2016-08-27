@@ -11,6 +11,7 @@
 	<h:outputStylesheet name="style.css" library="css"></h:outputStylesheet>
 </h:head>
 <h:body>
+	<ui:insert name="header">
 
 		<h:form>
 			<div>
@@ -20,21 +21,16 @@
 						<tr>
 							<td width="50%" height="10%"></td>
 							<td width="50%" height="10%"><p:outputLabel
-									value="#{msg['header.select.country']}" /> <p:selectOneMenu 
+									value="#{msg['header.select.country']}" /> <p:selectOneMenu
 									value="#{langApplication.langSelected}">
 									<f:selectItems var="lang" value="#{langApplication.langs}"
 										itemLabel="#{lang.country}" itemValue="#{lang.isoCountryCode}">
 
 									</f:selectItems>
 
-								</p:selectOneMenu>
-								<p:commandButton
-									action="#{langApplication.changeLanguage}"
-									update="@form"
-									process="@form"
-									value="#{msg['header.refresh.country']}" 
-								/>
-								</td>
+								</p:selectOneMenu> <p:commandButton action="#{langApplication.changeLanguage}"
+									update="@form" process="@form"
+									value="#{msg['header.refresh.country']}" /></td>
 						</tr>
 						<tr>
 							<td width="95%" height="20%">
@@ -88,21 +84,23 @@
 
 				</div>
 			</div>
+
 		</h:form>
+	</ui:insert>
 
 
 
-
-		<div id="content">
-			<div id="content_left">Prova</div>
-			<div id="content_right">
-				<ui:include src="/faces/template/login.xhtml"></ui:include>
-			</div>
+	
+		<div id="content_left">
 
 		</div>
-		<div id="footer">
-			<p:outputLabel value="#{msg['footer.copyright']}" />
+		<div id="content_right">
+			<ui:include src="/faces/template/login.xhtml"></ui:include>
 		</div>
+
+	<div id="footer">
+		<p:outputLabel value="#{msg['footer.copyright']}" />
+	</div>
 
 </h:body>
 </html>

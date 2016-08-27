@@ -10,23 +10,39 @@
 	<h:outputStylesheet name="style.css" library="css"></h:outputStylesheet>
 </h:head>
 <h:body>
-		<h:form id="loginForm">
-			<p:growl id="msgLogin" showSummary="true" showDetail="true" />
+<!-- 	<p:growl id="msgLogin" showSummary="true" showDetail="false" -->
+<!-- 		life="5000" /> -->
 
-			<p:panelGrid columns="1" styleClass="transparentBackground">
-				<p:outputLabel value="#{msg['menu.login.username']}" />
-				<p:inputText value="#{loginBean.username}" required="true">
-				</p:inputText>
-				<p:outputLabel value="#{msg['menu.login.password']}" />
-				<p:password value="#{loginBean.password}" required="true">
-				</p:password>
-			</p:panelGrid>
-			<p:panelGrid columns="2" styleClass="transparentBackground">
-				<p:commandButton value="#{msg['menu.login.button.login']}"></p:commandButton>
-				<p:commandButton value="#{msg['menu.login.button.signin']}"></p:commandButton>
-			</p:panelGrid>
+	<h:form id="loginForm">
 
-
-		</h:form>
+		<p:panelGrid columns="1" styleClass="transparentBackground"
+			rendered="#{loginBean.user eq null}">
+			<p:outputLabel value="#{msg['menu.login.username']}" />
+			<p:inputText id="username" value="#{loginBean.username}" 
+			required="true" requiredMessage="#{msg['error.username.required']}"
+				validatorMessage="#{msg['error.username.length']}"
+			>
+				<f:validateLength minimum="8" maximum="16"/>
+			</p:inputText>
+			<p:message for="username"/>
+			<p:outputLabel value="#{msg['menu.login.password']}" />
+			<p:password id="password" value="#{loginBean.password}" required="true" requiredMessage="#{msg['error.password.required']}">
+			</p:password>
+			<p:message for="password"></p:message>
+		</p:panelGrid>
+		<p:panelGrid columns="2" styleClass="transparentBackground"
+			rendered="#{loginBean.user eq null}">
+			<p:commandButton value="#{msg['menu.login.button.login']}"
+				process="@form" update="@form" ajax="false"
+				action="#{loginBean.update()}"></p:commandButton>
+			<p:commandButton value="#{msg['menu.login.button.signin']}"></p:commandButton>
+		</p:panelGrid>
+		<p:outputLabel value="Ciao #{loginBean.user.firstName}"
+			rendered="#{loginBean.user ne null}"></p:outputLabel>
+		<p:commandButton value="LogOut" process="@form" update="@form"
+			action="#{loginBean.logout()}" 
+			rendered="#{loginBean.user ne null}"
+		></p:commandButton>
+	</h:form>
 </h:body>
 </html>

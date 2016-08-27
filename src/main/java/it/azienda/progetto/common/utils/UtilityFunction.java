@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import it.azienda.progetto.common.utils.bean.InfoLanguage;
@@ -16,6 +17,13 @@ public class UtilityFunction {
 	public static ResourceBundle getBundle(){
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		return ctx.getApplication().getResourceBundle(ctx, "msg");
+	}
+	
+	public static void messageError(String bundleMsg){
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage(getBundle().getString(bundleMsg), getBundle().getString(bundleMsg));
+		message.setSeverity(FacesMessage.SEVERITY_ERROR);
+		ctx.addMessage(null, message);
 	}
 	
 	public static String md5Generator(String input) {

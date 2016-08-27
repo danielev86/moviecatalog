@@ -5,10 +5,24 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+	<h:outputScript name="jquery-3.1.0.min.js" library="js" target="head"></h:outputScript>
+	<h:outputStylesheet name="style.css" library="css"></h:outputStylesheet>
+</h:head>
 <h:body>
-		<ui:composition template="/faces/template/home_template.xhtml">
-			<ui:define name="west_content"></ui:define>
 
-		</ui:composition>
+	<ui:include src="/faces/template/header.xhtml"></ui:include>
+	<div id="content">
+		<div id="content_left">
+			<ui:include src="/faces/template/left_content.xhtml"></ui:include>
+		</div>
+		<div id="content_right">
+			<ui:include src="/faces/template/login.xhtml"></ui:include>
+		</div>
+	</div>
+	<div id="footer">
+		<ui:include src="/faces/template/footer.xhtml"></ui:include>
+	</div>
 </h:body>
 </html>

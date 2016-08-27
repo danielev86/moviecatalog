@@ -22,6 +22,11 @@
 		/WEB-INF/applicationContext.xml
 		</param-value>
 	</context-param>
+	
+	<context-param>
+    <param-name>javax.faces.FACELETS_VIEW_MAPPINGS</param-name>
+    <param-value>*.jsf</param-value>
+</context-param>
   <listener>
     <listener-class>
 		org.springframework.web.context.ContextLoaderListener
