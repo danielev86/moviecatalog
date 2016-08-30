@@ -6,43 +6,88 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<h:outputScript name="jsf.js" library="javax.faces" target="head"></h:outputScript>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+	<!-- 	<h:outputStylesheet name="grid/grid.css" library="primefaces" /> -->
 	<h:outputStylesheet name="style.css" library="css"></h:outputStylesheet>
+
+
 </h:head>
 <h:body>
-<!-- 	<p:growl id="msgLogin" showSummary="true" showDetail="false" -->
-<!-- 		life="5000" /> -->
+	<!-- 	<p:growl id="msgLogin" showSummary="true" showDetail="false" -->
+	<!-- 		life="5000" /> -->
 
 	<h:form id="loginForm">
 
 		<p:panelGrid columns="1" styleClass="transparentBackground"
 			rendered="#{loginBean.user eq null}">
 			<p:outputLabel value="#{msg['menu.login.username']}" />
-			<p:inputText id="username" value="#{loginBean.username}" 
-			required="true" requiredMessage="#{msg['error.username.required']}"
-				validatorMessage="#{msg['error.username.length']}"
-			>
-				<f:validateLength minimum="8" maximum="16"/>
+			<p:inputText id="username" value="#{loginBean.username}"
+				required="true" requiredMessage="#{msg['error.username.required']}">
+				<f:validator validatorId="usernameValidator" />
 			</p:inputText>
-			<p:message for="username"/>
+			<p:message for="username" />
 			<p:outputLabel value="#{msg['menu.login.password']}" />
-			<p:password id="password" value="#{loginBean.password}" required="true" requiredMessage="#{msg['error.password.required']}">
+			<p:password id="password" value="#{loginBean.password}"
+				required="true" requiredMessage="#{msg['error.password.required']}">
+				<f:validator validatorId="passwordValidator" />
 			</p:password>
 			<p:message for="password"></p:message>
 		</p:panelGrid>
 		<p:panelGrid columns="2" styleClass="transparentBackground"
 			rendered="#{loginBean.user eq null}">
 			<p:commandButton value="#{msg['menu.login.button.login']}"
-				process="@form" update="@form" ajax="false"
-				action="#{loginBean.update()}"></p:commandButton>
-			<p:commandButton value="#{msg['menu.login.button.signin']}"></p:commandButton>
+				process="@form" update="@form" action="#{loginBean.update()}"></p:commandButton>
+			<p:commandButton id="signin"
+				value="#{msg['menu.login.button.signin']}"
+				oncomplete="PF('pnlSignin').show();" process="@form" update="@form"
+				immediate="true">
+
+			</p:commandButton>
 		</p:panelGrid>
 		<p:outputLabel value="Ciao #{loginBean.user.firstName}"
 			rendered="#{loginBean.user ne null}"></p:outputLabel>
 		<p:commandButton value="LogOut" process="@form" update="@form"
-			action="#{loginBean.logout()}" 
-			rendered="#{loginBean.user ne null}"
-		></p:commandButton>
+			action="#{loginBean.logout()}" rendered="#{loginBean.user ne null}"></p:commandButton>
+
+		<p:dialog widgetVar="pnlSignin" id="signinDialog" closable="true"
+			header="#{msg['menu.signin.panel']}"
+			styleClass="transparentBackground">
+			<p:panelGrid columns="3" styleClass="transparentBackground">
+				<p:outputLabel value="#{msg['menu.signin.firstname']}" />
+				<p:inputText id="firstnameSignin"
+					value="#{signinBean.userRegistration.firstName}"></p:inputText>
+				<p:message for="firstnameSignin" />
+
+				<p:outputLabel value="#{msg['menu.signin.lastname']}" />
+				<p:inputText id="lastnameSignin"
+					value="#{signinBean.userRegistration.lastName}"></p:inputText>
+				<p:message for="lastnameSignin" />
+
+				<p:outputLabel value="#{msg['menu.signin.username']}" />
+				<p:inputText id="usernameSignin"
+					value="#{signinBean.userRegistration.username}"></p:inputText>
+				<p:message for="usernameSignin" />
+
+				<p:outputLabel value="#{msg['menu.signin.password']}" />
+				<p:password id="passwordSignin" match="confirmPasswordSignin"
+					value="#{signinBean.userRegistration.password}"></p:password>
+				<p:message for="passwordSignin"></p:message>
+
+				<p:outputLabel value="#{msg['menu.signin.confirmpassword']}" />
+				<p:password id="confirmPasswordSignin" match="passwordSignin"
+					value="#{signinBean.userRegistration.password}"></p:password>
+				<h:inputHidden />
+
+				<p:outputLabel value="#{msg['menu.signin.email']}" />
+				<p:inputText id="emailSignin"
+					value="#{signinBean.userRegistration.email}"></p:inputText>
+				<p:message for="emailSignin"></p:message>
+			</p:panelGrid>
+			<div style="margin-top:10%;" align="right">
+				<p:commandButton value="Registra"></p:commandButton>
+				<p:commandButton value="Annulla"></p:commandButton>
+			</div>
+		</p:dialog>
 	</h:form>
 </h:body>
 </html>

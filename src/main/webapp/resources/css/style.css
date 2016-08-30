@@ -48,9 +48,16 @@ h1{
 	border: none !important;
 }
 
+
 #footer {
 	width: 100%;
 	height: 10%;
 	clear: both;
 	background-color: #feeebd;
+}
+
+--Allineamento bottoni---
+
+.rightButtonAlign{
+	align:right;
 }

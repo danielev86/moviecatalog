@@ -57,7 +57,6 @@ public class LoginBean implements Serializable {
 			System.out.println(user.getFirstName());
 		}
 		if (username.length() > 25) {
-			UtilityFunction.messageError("error.username.lenght");
 		} else {
 			user = new UserDTOImpl();
 			user.setFirstName("Tizio");

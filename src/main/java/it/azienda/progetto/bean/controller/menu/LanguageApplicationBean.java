@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -17,7 +18,7 @@ import it.azienda.progetto.common.utils.bean.InfoLanguage;
 import it.azienda.progetto.dto.UserDTO;
 
 @ManagedBean(name = "langApplication")
-@ViewScoped
+@SessionScoped
 public class LanguageApplicationBean implements Serializable {
 
 	private Set<InfoLanguage> langs;
@@ -26,9 +27,7 @@ public class LanguageApplicationBean implements Serializable {
 
 	@PostConstruct
 	public void initLanguage() {
-		langs = UtilityFunction.loadLang();
-		langSelected = "it";
-		areaLang = new Locale("it", "IT");
+//		langs = UtilityFunction.loadLang();
 	}
 
 	public Locale getAreaLang() {
@@ -56,20 +55,26 @@ public class LanguageApplicationBean implements Serializable {
 	}
 
 	public String changeLanguage(String nation) {
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		UserDTO user = (UserDTO) session.getAttribute("userInSession");
 
-		if (user != null) {
-			System.out.println(user.getFirstName());
+		if(nation.equals("it")){
+			this.setAreaLang(new Locale(nation));
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(this.getAreaLang());
+			
 		}
-
-		for (InfoLanguage iter : langs) {
-			if (iter.getIsoCountryCode().equals(nation)) {
-				Locale localeTmp = new Locale(iter.getIsoCountryCode(), iter.getIsoLangCode());
-				this.setAreaLang(localeTmp);
-				FacesContext.getCurrentInstance().getViewRoot().setLocale(this.getAreaLang());
-
-			}
+		if(nation.equals("en")){
+			this.setAreaLang(new Locale(nation));
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(this.getAreaLang());
+			
+		}
+		if(nation.equals("es")){
+			this.setAreaLang(new Locale(nation));
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(this.getAreaLang());
+			
+		}
+		if(nation.equals("fr")){
+			this.setAreaLang(new Locale(nation));
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(this.getAreaLang());
+			
 		}
 		return null;
 	}

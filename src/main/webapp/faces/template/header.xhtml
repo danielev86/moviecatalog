@@ -7,7 +7,6 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
-	<h:outputScript name="jquery-3.1.0.min.js" library="js" target="head"></h:outputScript>
 	<h:outputStylesheet name="style.css" library="css"></h:outputStylesheet>
 
 </h:head>
@@ -41,12 +40,12 @@
 							<p:graphicImage library="images" name="fr.png"></p:graphicImage>
 						</p:commandLink>					
 					</td>
-					<td height="10%">
-						<p:commandLink action="#{langApplication.changeLanguage('de')}"
-							process="@form" update="@form" ajax="false">
-							<p:graphicImage library="images" name="de.png"/>			
-						</p:commandLink>
-					</td>
+<!-- 					<td height="10%"> -->
+<!-- 						<p:commandLink action="#{langApplication.changeLanguage('de')}" -->
+<!-- 							process="@form" update="@form" ajax="false"> -->
+<!-- 							<p:graphicImage library="images" name="de.png"/>			 -->
+<!-- 						</p:commandLink> -->
+<!-- 					</td> -->
 				</tr>
 			</table>
 		</h:form>

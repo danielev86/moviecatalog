@@ -7,18 +7,21 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
-	<h:outputScript name="jquery-3.1.0.min.js" library="js" target="head"></h:outputScript>
+<!-- 	<h:outputStylesheet name="grid/grid.css" library="primefaces" /> -->
 	<h:outputStylesheet name="style.css" library="css"></h:outputStylesheet>
+
+
 </h:head>
 <h:body>
-
+	<div class="ui-grid grid-responsive">
 	<ui:include src="/faces/template/header.xhtml"></ui:include>
-	<div id="content">
-		<div id="content_left">
-			<ui:include src="/faces/template/left_content.xhtml"></ui:include>
-		</div>
-		<div id="content_right">
-			<ui:include src="/faces/template/login.xhtml"></ui:include>
+		<div class="ui-grid-row">
+			<div class="ui-grid-col-8">
+				<ui:include src="/faces/template/left_content.xhtml"></ui:include>
+			</div>
+			<div class="ui-grid-col-4">
+				<ui:include src="/faces/template/login.xhtml"></ui:include>
+			</div>
 		</div>
 	</div>
 	<div id="footer">

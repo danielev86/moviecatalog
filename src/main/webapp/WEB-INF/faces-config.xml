@@ -6,30 +6,26 @@
 	<application>
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
-	
+
 	<application>
 		<locale-config>
 			<default-locale>it</default-locale>
-			<supported-locale>de</supported-locale>
-			<supported-locale>es</supported-locale>
-			<supported-locale>fr</supported-locale>
-			<supported-locale>en</supported-locale>
 		</locale-config>
 		<resource-bundle>
 			<base-name>it.azienda.progetto.bundle.messages</base-name>
 			<var>msg</var>
 		</resource-bundle>
 	</application>
-	
+
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>logout</from-outcome>
 			<to-view-id>/faces/page/home.xhtml</to-view-id>
-			<redirect/>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
-	
+
 
 
 </faces-config>
