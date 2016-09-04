@@ -15,10 +15,10 @@
 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver">
 		</property>
-		<property name="password" value="NtedkYZQZf__"></property>
+		<property name="password" value="danielemysql1986"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/moviecatalog">
 		</property>
-		<property name="username" value="admin4jxaM9p">
+		<property name="username" value="root">
 		</property>
 
 

@@ -8,8 +8,77 @@
 <h:head>
 	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
 	<h:outputStylesheet name="style.css" library="css"></h:outputStylesheet>
+
 </h:head>
 <h:body>
-	<p>Lorem ipsum inculum</p>
+	<h:form id="dialogSigninForm">
+		<p:growl id="growlSignin" life="5000" showSummary="true" showDetail="false"></p:growl>
+		<p:dialog widgetVar="pnlSignin" id="signinDialog" closable="false"
+			header="#{msg['menu.signin.panel']}"
+			styleClass="transparentBackground">
+			<p:panelGrid columns="2" styleClass="transparentBackground">
+				<p:outputLabel value="#{msg['menu.signin.firstname']}" />
+				<p:inputText id="firstnameSignin"
+					value="#{signinBean.userRegistration.firstName}" required="true"
+					requiredMessage="#{msg['error.signin.firstname.required']}"
+					>
+						<f:validator validatorId="firstnameValidator"></f:validator>
+					</p:inputText>
+
+				<p:outputLabel value="#{msg['menu.signin.lastname']}" />
+				<p:inputText id="lastnameSignin"
+					value="#{signinBean.userRegistration.lastName}" required="true"
+					requiredMessage="#{msg['error.signin.lastname.required']}">
+					<f:validator validatorId="lastnameValidator"></f:validator>	
+				</p:inputText>
+
+				<p:outputLabel value="#{msg['menu.signin.username']}" />
+				<p:inputText id="usernameSignin"
+					value="#{signinBean.userRegistration.username}"
+					required="true" requiredMessage="#{msg['error.signin.username.required']}"
+					></p:inputText>
+
+				<p:outputLabel value="#{msg['menu.signin.password']}" />
+				<p:password id="passwordSignin" match="confirmPasswordSignin"
+					value="#{signinBean.userRegistration.password}"
+					required="true" requiredMessage="#{msg['error.signin.password.required']}" validatorMessage="#{msg['error.signin.password.noequal']}"
+					></p:password>
+
+				<p:outputLabel value="#{msg['menu.signin.confirmpassword']}" />
+				<p:password id="confirmPasswordSignin" match="passwordSignin"
+					value="#{signinBean.userRegistration.password}"
+					required="true" requiredMessage="#{msg['error.signin.confirmpassword.required']}"
+					></p:password>
+
+				<p:outputLabel value="#{msg['menu.signin.email']}" />
+				<p:inputText id="emailSignin"
+					value="#{signinBean.userRegistration.email}"
+					required="true" requiredMessage="#{msg['error.signin.email.required']}" validatorMessage="#{msg['error.signin.email.novalid']}">
+						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+					</p:inputText>
+			</p:panelGrid>
+			<div style="margin-top: 10%;" align="right">
+				<p:commandButton value="#{msg['menu.signin.button.registra']}"
+					process="@form" update="@form growlSignin"
+					oncomplete="handleLoginRequest(xhr, status, args)"></p:commandButton>
+				<p:commandButton value="#{msg['menu.signin.button.annulla']}"></p:commandButton>
+			</div>
+		</p:dialog>
+	</h:form>
+
+
+
+	<script type="text/javascript">
+		function handleLoginRequest(xhr, status, args) {
+			if (args.validationFailed || !args.loggedIn) {
+				PF('pnlSignin').jq.effect("highlight", {
+					times : 5
+				});
+			} else {
+				PF('pnlSignin').hide();
+			}
+		}
+	</script>
+
 </h:body>
 </html>

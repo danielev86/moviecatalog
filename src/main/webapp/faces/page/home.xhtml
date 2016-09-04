@@ -1,31 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
-<!-- 	<h:outputStylesheet name="grid/grid.css" library="primefaces" /> -->
-	<h:outputStylesheet name="style.css" library="css"></h:outputStylesheet>
+	xmlns:p="http://primefaces.org/ui"
+	template="/faces/template/masterTemplate.xhtml">
+	<ui:define name="left_content_component">
+		<p>Lorem ipsum inculum</p>
+
+	</ui:define>
 
 
-</h:head>
-<h:body>
-	<div class="ui-grid grid-responsive">
-	<ui:include src="/faces/template/header.xhtml"></ui:include>
-		<div class="ui-grid-row">
-			<div class="ui-grid-col-8">
-				<ui:include src="/faces/template/left_content.xhtml"></ui:include>
-			</div>
-			<div class="ui-grid-col-4">
-				<ui:include src="/faces/template/login.xhtml"></ui:include>
-			</div>
-		</div>
-	</div>
-	<div id="footer">
-		<ui:include src="/faces/template/footer.xhtml"></ui:include>
-	</div>
-</h:body>
-</html>
+
+</ui:composition>
