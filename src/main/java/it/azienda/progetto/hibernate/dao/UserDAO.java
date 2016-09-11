@@ -2,16 +2,11 @@ package it.azienda.progetto.hibernate.dao;
 
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,35 +23,41 @@ public class UserDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	public UserDAO(){
+	
+	}
 	public List<User> retrieveAllUser(){
-		HibernateTemplate hibernateTemplate = new HibernateTemplate(sessionFactory);
-		return (List<User>) hibernateTemplate.find("From UserImpl");
+
+		return (List<User>) sessionFactory.openSession().createQuery("From UserImpl").list();
 	}
 	
-	public User retrieveUser(final User user){
-		HibernateTemplate hibernateTemplate = new HibernateTemplate(sessionFactory);
-		List<Object> userList = (List<Object>) hibernateTemplate.executeFind(new HibernateCallback<Object>() {
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
 
-			@Override
-			public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query= session.createSQLQuery("SELECT u.*, r.role FROM moviecatalog.users as u join moviecatalog.roles as r ON u.user_id=r.id WHERE username=:username AND password=md5(:password)");
-				query.setParameter("username", user.getUsername());
-				query.setParameter("password", user.getPassword());
-				return query.list();
-			}
-		});
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+
+
+	public User retrieveUser(String username, String password){
+		Query query= sessionFactory.getCurrentSession().createSQLQuery("SELECT u.*, r.role FROM users as u join roles as r ON u.user_id=r.id WHERE username=:username AND password=md5(:password)");
+		query.setParameter("username", username);
+		query.setParameter("password", password);
+		List<Object> userList = (List<Object>) query.list();
 		
 		User userRes = new UserImpl();
 		if (!userList.isEmpty()){
 			Object[] row = (Object[]) userList.get(0);
-			userRes.setId(((BigDecimal) row[0]).intValue());
+			userRes.setId((Integer) row[0]);
 			userRes.setFirstName((String) row[1]);
 			userRes.setLastName((String) row[2]);
 			userRes.setUsername((String) row[3]);
 			userRes.setPassword((String) row[4]);
 			userRes.setEmail((String)row[5]);
 			Role role = new RoleImpl();
-			role.setId(((BigDecimal)row[6]).intValue());
+			role.setId(((Integer) row[6]).intValue());
 			role.setRole((String) row[7]);
 			userRes.setRole(role);
 			return userRes;
@@ -65,6 +66,11 @@ public class UserDAO {
 		}
 		
 		
+	}
+	
+	public void insertUser(User user){
+		
+		sessionFactory.openSession().save(user);
 	}
 
 }

@@ -10,7 +10,6 @@ import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import javax.validation.ValidationException;
 
 import it.azienda.progetto.common.utils.bean.InfoLanguage;
 

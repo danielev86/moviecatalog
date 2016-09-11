@@ -3,22 +3,26 @@ package it.azienda.progetto.bean.controller.login;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
+import javax.faces.validator.ValidatorException;
 
 import it.azienda.progetto.common.utils.UtilityFunction;
 import it.azienda.progetto.dto.RoleDTO;
 import it.azienda.progetto.dto.UserDTO;
 import it.azienda.progetto.dto.impl.RoleDTOImpl;
 import it.azienda.progetto.dto.impl.UserDTOImpl;
+import it.azienda.progetto.hibernate.service.UserService;
 
 @ManagedBean(name = "loginBean")
-@ViewScoped
+@javax.faces.bean.SessionScoped
 public class LoginBean implements Serializable {
+	
+	@ManagedProperty(value="#{userService}")
+	private UserService userService;
 
 	private String username;
 	private String password;
@@ -52,26 +56,29 @@ public class LoginBean implements Serializable {
 		this.user = user;
 	}
 
-	public String update() {
-		if(user!=null){
-			System.out.println(user.getFirstName());
-		}
-		if (username.length() > 25) {
-		} else {
-			user = new UserDTOImpl();
-			user.setFirstName("Tizio");
-			user.setLastName("Ingcognito");
-			RoleDTO role = new RoleDTOImpl();
-			role.setId(1);
-			role.setRole("user");
-			user.setRole(role);
-			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-			session.setAttribute("userInSession", user);
-		}
-
-	
-		return null;
+	public UserService getUserService() {
+		return userService;
 	}
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	public String update() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		userService.stampa();
+		user = userService.retrieveUserToLogin(username, password);
+		if(user!=null){
+//			HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
+//			session.setAttribute("userInSession", user);			
+			return null;
+		}else {
+			FacesMessage message = new FacesMessage(UtilityFunction.getBundle().getString("error.username.nouser"), UtilityFunction.getBundle().getString("error.username.nouser"));
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage(null, message);
+			return null;
+		}
+	}
+	
+	
 	
 	public String logout(){
 

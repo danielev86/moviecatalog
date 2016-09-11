@@ -14,8 +14,8 @@
 
 </h:head>
 <h:body>
-	<!-- 	<p:growl id="msgLogin" showSummary="true" showDetail="false" -->
-	<!-- 		life="5000" /> -->
+		<p:growl id="msgLogin" showSummary="true" showDetail="false"
+			life="5000" />
 
 	<h:form id="loginForm">
 
@@ -37,7 +37,7 @@
 		<p:panelGrid columns="2" styleClass="transparentBackground"
 			rendered="#{loginBean.user eq null}">
 			<p:commandButton value="#{msg['menu.login.button.login']}"
-				process="@form" update="@form" action="#{loginBean.update()}"></p:commandButton>
+				process="@form" update="@form msgLogin" action="#{loginBean.update()}"></p:commandButton>
 			<p:commandButton id="signin"
 				value="#{msg['menu.login.button.signin']}"
 				oncomplete="PF('pnlSignin').show();" process="@form" update="@form dialogSigninForm:signinDialog"

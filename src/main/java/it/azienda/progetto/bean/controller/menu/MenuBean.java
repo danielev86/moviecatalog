@@ -7,8 +7,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
-
 import it.azienda.progetto.bean.controller.login.LoginBean;
 import it.azienda.progetto.dto.UserDTO;
 
@@ -23,8 +21,7 @@ public class MenuBean implements Serializable {
 	@PostConstruct
 	public void initMenuHome() {
 		showMenu = false;
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		user = (UserDTO) session.getAttribute("userInSession");
+//		user = (UserDTO) session.getAttribute("userInSession");
 	
 	}
 
