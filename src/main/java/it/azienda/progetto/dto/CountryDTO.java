@@ -22,10 +22,10 @@ public interface CountryDTO {
 
 	public void setCompanies(Set<CompanyDTO> companies);
 
-	@Override
-	public int hashCode();
-
-	@Override
-	public boolean equals(Object obj);
+//	@Override
+//	public int hashCode();
+//
+//	@Override
+//	public boolean equals(Object obj);
 
 }

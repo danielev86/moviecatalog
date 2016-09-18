@@ -55,6 +55,9 @@ public class MenuBean implements Serializable {
 		this.user = user;
 	}
 	
+	public String insertStar(){
+		return "insertStarMenu";
+	}
 	
 
 }

@@ -6,6 +6,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -61,6 +63,12 @@ public class UtilityFunction {
 		langApp.add(new InfoLanguage("Spanish", "es", "ES", ""));
 		return langApp;
 		
+	}
+	
+	public static boolean isNotAlphanumericCharacter(String value){
+		Pattern pattern = Pattern.compile("[^a-zA-Z]");
+		Matcher matcher = pattern.matcher(value);
+		return matcher.matches();
 	}
 
 

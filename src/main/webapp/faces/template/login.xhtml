@@ -16,39 +16,33 @@
 <h:body>
 		<p:growl id="msgLogin" showSummary="true" showDetail="false"
 			life="5000" />
-
-	<h:form id="loginForm">
+	<f:event listener="#{loginBean.updateMessages(true)}" type="preRenderView" />
+	<h:form id="loginForm" prependId="false">
 
 		<p:panelGrid columns="1" styleClass="transparentBackground"
 			rendered="#{loginBean.user eq null}">
 			<p:outputLabel value="#{msg['menu.login.username']}" />
-			<p:inputText id="username" value="#{loginBean.username}"
+			<h:inputText id="username"   value="#{loginBean.username}"
 				required="true" requiredMessage="#{msg['error.username.required']}">
 				<f:validator validatorId="usernameValidator" />
-			</p:inputText>
+			</h:inputText>
 			<p:message for="username" />
 			<p:outputLabel value="#{msg['menu.login.password']}" />
-			<p:password id="password" value="#{loginBean.password}"
+			<h:inputSecret id="password" value="#{loginBean.password}"
 				required="true" requiredMessage="#{msg['error.password.required']}">
 				<f:validator validatorId="passwordValidator" />
-			</p:password>
+			</h:inputSecret>
 			<p:message for="password"></p:message>
 		</p:panelGrid>
-		<p:panelGrid columns="2" styleClass="transparentBackground"
+		<p:panelGrid columns="2" styleClass="transparentBackground" 
 			rendered="#{loginBean.user eq null}">
-			<p:commandButton value="#{msg['menu.login.button.login']}"
-				process="@form" update="@form msgLogin" action="#{loginBean.update()}"></p:commandButton>
-			<p:commandButton id="signin"
-				value="#{msg['menu.login.button.signin']}"
-				oncomplete="PF('pnlSignin').show();" process="@form" update="@form dialogSigninForm:signinDialog"
-				immediate="true">
-
+			<p:commandButton ajax="false" value="#{msg['menu.login.button.login']}" action="#{loginBean.update()}" process="@form" update="@form msgLogin"></p:commandButton>
+			<p:commandButton id="signin" action="#{loginBean.openDialog()}" immediate="true" process="@form" update="@form dialogSigninForm:signinDialog"
+				value="#{msg['menu.login.button.signin']}" >
+				
 			</p:commandButton>
+
 		</p:panelGrid>
-		<p:outputLabel value="Ciao #{loginBean.user.firstName}"
-			rendered="#{loginBean.user ne null}"></p:outputLabel>
-		<p:commandButton value="LogOut" process="@form" update="@form"
-			action="#{loginBean.logout()}" rendered="#{loginBean.user ne null}"></p:commandButton>
 	</h:form>
 
 

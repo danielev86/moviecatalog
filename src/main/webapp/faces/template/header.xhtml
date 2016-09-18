@@ -99,14 +99,14 @@
 						<p:menuitem value="#{msg['menu.nav.series.genre']}" url="#">
 						</p:menuitem>
 					</p:submenu>
-					<p:submenu label="#{msg['menu.nav.admin']}" rendered="#{loginBean.user ne null and loginBean.user.role eq 'admin'}">
-					
-					
+					<p:submenu label="#{msg['menu.nav.admin']}" rendered="#{loginBean.user.role.role eq 'admin'}">
+						<p:menuitem value="#{msg['menu.nav.admin.addstar']}" action="#{menuBean.insertStar()}" immediate="true"/>
 					</p:submenu>
 					<p:menuitem value="#{msg['menu.nav.aboutus']}">
 					</p:menuitem>
 					<p:menuitem value="#{msg['menu.nav.contact']}">
 					</p:menuitem>
+					
 					
 
 				</p:menubar>

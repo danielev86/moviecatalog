@@ -1,37 +1,47 @@
 package it.azienda.progetto.bean.controller.login;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+
+import org.primefaces.context.RequestContext;
+import org.springframework.security.web.WebAttributes;
 
 import it.azienda.progetto.common.utils.UtilityFunction;
-import it.azienda.progetto.dto.RoleDTO;
 import it.azienda.progetto.dto.UserDTO;
-import it.azienda.progetto.dto.impl.RoleDTOImpl;
-import it.azienda.progetto.dto.impl.UserDTOImpl;
 import it.azienda.progetto.hibernate.service.UserService;
 
 @ManagedBean(name = "loginBean")
-@javax.faces.bean.SessionScoped
+@SessionScoped
 public class LoginBean implements Serializable {
-	
-	@ManagedProperty(value="#{userService}")
-	private UserService userService;
 
+	@ManagedProperty(value = "#{userService}")
+	private UserService userService;
 	private String username;
 	private String password;
 	private UserDTO user;
 
 	@PostConstruct
-	public void init(){
+	public void init() {
 
 	}
+
+	public void openDialog() {
+		System.out.println("------");
+		RequestContext.getCurrentInstance().execute("PF('pnlSignin').show();");
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -59,32 +69,44 @@ public class LoginBean implements Serializable {
 	public UserService getUserService() {
 		return userService;
 	}
+
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+
 	public String update() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		userService.stampa();
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		HttpServletRequest request = ((HttpServletRequest) context.getRequest());
 		user = userService.retrieveUserToLogin(username, password);
-		if(user!=null){
-//			HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
-//			session.setAttribute("userInSession", user);			
-			return null;
-		}else {
-			FacesMessage message = new FacesMessage(UtilityFunction.getBundle().getString("error.username.nouser"), UtilityFunction.getBundle().getString("error.username.nouser"));
-			message.setSeverity(FacesMessage.SEVERITY_ERROR);
-			context.addMessage(null, message);
-			return null;
+		ServletResponse resposnse = ((ServletResponse) context.getResponse());
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/j_spring_security_check");
+		try {
+			dispatcher.forward(request, resposnse);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		FacesContext.getCurrentInstance().responseComplete();
+
+		return null;
 	}
-	
-	
-	
-	public String logout(){
+
+	public String logout() {
 
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 
 		return "logout";
+	}
+
+	public void updateMessages(boolean update) throws Exception {
+		System.out.println("Start LoginBean.updateMessages");
+		Exception ex = (Exception) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.get(WebAttributes.AUTHENTICATION_EXCEPTION);
+
+		if (ex != null) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, UtilityFunction.getBundle().getString("error.username.nouser"), UtilityFunction.getBundle().getString("error.username.nouser")));
+		}
 	}
 
 }

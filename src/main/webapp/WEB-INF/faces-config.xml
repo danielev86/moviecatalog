@@ -16,6 +16,15 @@
 			<var>msg</var>
 		</resource-bundle>
 	</application>
+	
+	<navigation-rule>
+		<from-view-id>/faces/page/home.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>userLoggedOk</from-outcome>
+			<to-view-id>/faces/auth/welcome.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
@@ -24,6 +33,16 @@
 			<to-view-id>/faces/page/home.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>insertStarMenu</from-outcome>
+			<to-view-id>/faces/auth/insertStar.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
 	</navigation-rule>
 
 

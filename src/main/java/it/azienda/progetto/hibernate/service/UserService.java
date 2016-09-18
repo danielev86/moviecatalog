@@ -26,20 +26,20 @@ public class UserService {
 		return userDao.retrieveAllUser().get(0).getUsername();
 	}
 
-	public UserDAO getUserDao() {
-		return userDao;
-	}
-
-	public void setUserDao(UserDAO userDao) {
-		this.userDao = userDao;
-	}
+//	public UserDAO getUserDao() {
+//		return userDao;
+//	}
+//
+//	public void setUserDao(UserDAO userDao) {
+//		this.userDao = userDao;
+//	}
 	
 	public void stampa(){
 		System.out.println("--------Stampami--------------");
 	}
 
 	public UserDTO retrieveUserToLogin(String username, String password){
-		UserDAO userDao = this.getUserDao();
+//		UserDAO userDao = this.getUserDao();
 		User user = this.userDao.retrieveUser(username, password);
 		if (user!=null){
 			UserDTO userRetrieve = new UserDTOImpl();

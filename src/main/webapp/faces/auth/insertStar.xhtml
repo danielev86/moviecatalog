@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+	<h:outputStylesheet name="style.css" library="css"></h:outputStylesheet>
+</h:head>
+
+<ui:composition template="/faces/template/masterTemplateLogged.xhtml">
+
+	<ui:define name="left_content_component">
+		<p:growl id="growlInsertStar" showDetail="false" showSummary="true"/>
+		<h:form>
+			<p:outputLabel value="#{msg['label.addstar.title']}"/>
+			<p:separator/>
+			<p:panelGrid id="pnlInsNomeCognome" columns="2"
+				styleClass="transparentBackground">
+				<p:panelGrid styleClass="transparentBackground" columns="1">
+					<p:outputLabel value="#{msg['label.addstar.firstname']}" />
+					<p:inputText value="#{starBean.star.firstName}" required="true" requiredMessage="#{msg['error.addstar.firstname.required']}">
+						<f:validator validatorId="firstnameInsertValidator"></f:validator>
+					</p:inputText>
+				</p:panelGrid>
+				<p:panelGrid styleClass="transparentBackground" columns="1">
+					<p:outputLabel value="#{msg['label.addstar.lastname']}" />
+					<p:inputText value="#{starBean.star.lastName}" required="true" requiredMessage="#{msg['error.addstar.lastname.required']}">
+						<f:validator validatorId="lastnameInsertValidator"></f:validator>
+					</p:inputText>
+				</p:panelGrid>
+			</p:panelGrid>
+
+			<p:panelGrid id="pnlInsDataNazione"
+				styleClass="transparentBackground">
+				<p:panelGrid styleClass="transparentBackground" columns="1">
+					<p:outputLabel value="#{msg['label.addstar.born']}" />
+					<p:calendar value="#{starBean.star.born}" mode="popup" pattern="dd/MM/yyyy"
+						showOn="button" />
+
+					<p:outputLabel value="#{msg['label.addstar.country']}" />
+					<p:selectOneMenu>
+						<f:selectItem itemLabel="#{msg['label.addstar.select.country']}" itemValue="" />
+						<f:selectItems value="#{starBean.countries}" var="iter"
+							itemLabel="#{iter.country}" itemValue="#{iter.id}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="#{msg['label.addstar.biography']}"/>
+					<p:inputTextarea value="#{starBean.star.biography}" rows="5" cols="110"/>
+				</p:panelGrid>
+				<div style="margin-top: 10%;" align="right">
+					<p:commandButton value="#{msg['label.addstar.button.insert']}" action="#{starBean.insertStar()}" 
+					process="@form" update="@form growlInsertStar"/>
+				</div>
+
+			</p:panelGrid>
+		</h:form>
+
+
+	</ui:define>
+
+
+
+
+</ui:composition>
+</html>
