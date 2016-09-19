@@ -14,7 +14,7 @@ public class FirstnameInsertValidator implements Validator {
 	
 	public void validate(FacesContext ctx, UIComponent component, Object value)throws ValidatorException{
 		String firstname = (String) value;
-		if (!UtilityFunction.isNotAlphanumericCharacter(firstname)){
+		if (UtilityFunction.isNotAlphanumericCharacter(firstname)){
 			FacesMessage message = new FacesMessage(UtilityFunction.getBundle().getString("error.addstar.firstname.alphanumeric")
 					,UtilityFunction.getBundle().getString("error.addstar.firstname.alphanumeric"));
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);

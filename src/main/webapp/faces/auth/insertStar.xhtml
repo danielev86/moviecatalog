@@ -41,10 +41,10 @@
 						showOn="button" />
 
 					<p:outputLabel value="#{msg['label.addstar.country']}" />
-					<p:selectOneMenu>
+					<p:selectOneMenu value="#{starBean.countryVal}">
 						<f:selectItem itemLabel="#{msg['label.addstar.select.country']}" itemValue="" />
 						<f:selectItems value="#{starBean.countries}" var="iter"
-							itemLabel="#{iter.country}" itemValue="#{iter.id}" />
+							itemLabel="#{iter.country}" itemValue="#{iter.country}" />
 					</p:selectOneMenu>
 					<p:outputLabel value="#{msg['label.addstar.biography']}"/>
 					<p:inputTextarea value="#{starBean.star.biography}" rows="5" cols="110"/>
@@ -55,6 +55,14 @@
 				</div>
 
 			</p:panelGrid>
+			
+			<p:dialog  widgetVar="pnlConfirm" closable="false" header="#{msg['label.addstar.dialog']}" showEffect="explode" closeOnEscape="explode" >
+				<p:outputLabel value="#{msg['label.addstar.dialog.confirm']}"/>
+				<div align="right" >
+					<p:commandButton action="#{starBean.closeConfirmDialog()}" value="#{msg['label.addstar.dialog.close']}" process="@form" update="@form"/>
+				</div>
+			
+			</p:dialog>
 		</h:form>
 
 

@@ -1,5 +1,7 @@
 package it.azienda.progetto.hibernate.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,10 @@ public class CountryDAO {
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM CountryImpl c WHERE c.country=:countryParam");
 		query.setParameter("countryParam", country);
 		return (Country) query.list().get(0);
+	}
+	
+	public List<Country> retrieveAllCountry(){
+		return (List<Country>) sessionFactory.getCurrentSession().createQuery("FROM CountryImpl c ORDER BY c.country").list();
 	}
 	
 	

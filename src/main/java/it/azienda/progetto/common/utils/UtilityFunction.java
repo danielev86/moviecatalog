@@ -66,7 +66,7 @@ public class UtilityFunction {
 	}
 	
 	public static boolean isNotAlphanumericCharacter(String value){
-		Pattern pattern = Pattern.compile("[^a-zA-Z]");
+		Pattern pattern = Pattern.compile("[^a-zA-Z+$]");
 		Matcher matcher = pattern.matcher(value);
 		return matcher.matches();
 	}
