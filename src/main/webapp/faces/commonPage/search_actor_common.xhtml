@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<p:outputLabel value="#{msg['label.search.actor']}" />
+	<p:separator />
+	<h:panelGrid columns="2" cellpadding="5">
+		<h:panelGrid styleClass="transparentBackground" columns="1">
+			<p:outputLabel value="#{msg['label.search.actor.firstname']}" />
+			<p:inputText value="" />
+		</h:panelGrid>
+		<h:panelGrid columns="1">
+			<p:outputLabel value="#{msg['label.search.actor.lastname']}" />
+			<p:inputText value="" />
+		</h:panelGrid>
+	</h:panelGrid>
+	<h:form>
+		<div align="right">
+
+			<p:commandButton value="#{msg['label.search.actor.buttonsearch']}" />
+
+		</div>
+	</h:form>
+	<p:dataTable value="#{personStarSearchController.actors}" var="actor" paginator="true" rows="5" paginatorPosition="top"
+	paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	rowsPerPageTemplate="5,10,15">
+		<f:facet name="header">
+			<p:outputLabel value="#{msg['label.search.actor.tableheader']}"/>
+		</f:facet>
+		
+		<p:column headerText="#{msg['label.search.actor.firstname']}" sortBy="#{actor.firstName}">
+			<p:outputLabel value="#{actor.firstName}"/>
+		</p:column>
+		
+		<p:column headerText="#{msg['label.search.actor.lastname']}" sortBy="#{actor.lastName}">
+			<h:outputText value="#{actor.lastName}"/>
+		
+		</p:column>
+	
+	</p:dataTable>
+
+</h:body>
+
+</html>

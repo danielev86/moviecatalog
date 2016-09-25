@@ -79,8 +79,8 @@
 				<p:menubar id="menuHome" rendered="#{menuBean.showMenu}"
 					style="clear:both">
 					<p:menuitem value="#{msg['menu.nav.home']}" />
-
-
+					<p:menuitem value="#{msg['menu.nav.actor']}" url="/faces/page/stars.xhtml" rendered="#{loginBean.user eq null}" />
+					<p:menuitem value="#{msg['menu.nav.actor']}" url="/faces/auth/stars.xhtml" rendered="#{loginBean.user ne null}" />
 					<p:submenu label="#{msg['menu.nav.movie']}">
 
 						<p:menuitem value="#{msg['menu.nav.movie.actor']}" url="#">
