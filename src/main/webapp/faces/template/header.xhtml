@@ -101,6 +101,7 @@
 					</p:submenu>
 					<p:submenu label="#{msg['menu.nav.admin']}" rendered="#{loginBean.user.role.role eq 'admin'}">
 						<p:menuitem value="#{msg['menu.nav.admin.addstar']}" action="#{menuBean.insertStar()}" immediate="true"/>
+						<p:menuitem value="#{msg['menu.nav.admin.addfilm']}" action="#{menuBean.insertFilm()}" immediate="true"/>
 					</p:submenu>
 					<p:menuitem value="#{msg['menu.nav.aboutus']}">
 					</p:menuitem>

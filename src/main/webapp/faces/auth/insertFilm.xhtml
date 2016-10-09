@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/faces/template/masterTemplateLogged.xhtml">
+	<ui:define name="left_content_component">
+		<h:form>
+			<p:growl id="growl" life="5000" showDetail="false" showSummary="true"/>
+			<p:wizard>
+
+				<p:tab title="#{msg['label.insertfilm.moviedesc']}">
+					<p:messages/>
+					<p:panelGrid columns="2" styleClass="transparentBackground">
+						<p:panelGrid styleClass="transparentBackground">
+							<p:graphicImage alt="#{msg['label.insertfilm.noposter']}"
+								url="#{movieBean.movie.poster}" id="imagePoster" />
+						</p:panelGrid>
+						<p:panelGrid styleClass="transparentBackground" columns="1">
+							<p:outputLabel value="#{msg['label.insertfilm.country']}" />
+							<p:selectManyMenu value="#{movieBean.countries}" required="true" requiredMessage="#{msg['error.insertfilm.country']}"
+								showCheckbox="true">
+								<f:selectItems var="country" value="#{movieBean.countrySelect}"
+									itemLabel="#{country.country}" itemValue="#{country}" />
+							</p:selectManyMenu>
+							<p:outputLabel value="#{msg['label.insertfilm.genre']}" />
+							<p:selectManyMenu value="#{movieBean.genres}" showCheckbox="true" required="true" requiredMessage="#{msg['error.insertfilm.genre']}">
+								<f:selectItems var="genre" value="#{movieBean.genreSelect}"
+									itemLabel="#{genre.genre}" itemValue="#{genre}" />
+							</p:selectManyMenu>
+							<p:outputLabel value="#{msg['label.insertfilm.daterelease']}" />
+							<p:calendar value="#{movieBean.movie.releaseDate}"
+								showOn="button" required="true" requiredMessage="#{msg['error.insertfilm.calendario']}" />
+						</p:panelGrid>
+
+					</p:panelGrid>
+					<p:panelGrid columns="1" styleClass="transparentBackground">
+						<p:outputLabel value="#{msg['label.insertfilm.movieurl']}" />
+						<h:panelGrid columns="2">
+							<p:inputText value="#{movieBean.movie.poster}" required="true" requiredMessage="#{msg['error.insertfilm.url']}"/>
+							<p:commandButton value="#{msg['label.insertfilm.refresh']}"
+								update="imagePoster" required="true" />
+						</h:panelGrid>
+						<p:outputLabel value="#{msg['label.insertfilm.company']}" />
+						<p:inputText value="#{movieBean.movie.company}" required="true" requiredMessage="#{msg['error.insertfilm.company']}"/>
+						<p:outputLabel value="#{msg['label.insertfilm.title']}" />
+						<p:inputText value="#{movieBean.movie.title}"  required="true" requiredMessage="#{msg['error.insertfilm.title']}"/>
+						<p:outputLabel value="#{msg['label.insertfilm.plot']}" />
+						<p:inputTextarea value="#{movieBean.movie.plot}" rows="5"
+							cols="110"  required="true" requiredMessage="#{msg['error.insertfilm.plot']}"/>
+					</p:panelGrid>
+				</p:tab>
+				<p:tab title="#{msg['label.insertfilm.actordesc']}">
+				</p:tab>
+				<p:tab title="#{msg['label.insertfilm.directordesc']}">
+				</p:tab>
+			</p:wizard>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

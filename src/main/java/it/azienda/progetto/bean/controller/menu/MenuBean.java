@@ -59,5 +59,9 @@ public class MenuBean implements Serializable {
 		return "insertStarMenu";
 	}
 	
+	public String insertFilm(){
+		System.out.println("Entra");
+		return "insertFilmMenu";
+	}
 
 }
