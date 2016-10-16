@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+	<h:outputStylesheet name="css" library="style.css" />
+</h:head>
+<h:body>
+	<h:form prependId="false">
+		<p:dataTable paginator="true" id="resultKiids"
+			value="#{exampleBean.kiids}" var="kiid" paginatorAlwaysVisible="true" rowIndexVar="index" 
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15" paginatorPosition="bottom">
+			<p:column headerText="Check Kiid">
+				<p:selectBooleanCheckbox value="#{kiid.value}" disabled="#{kiid.check}">
+					<p:ajax process="@form" update="resultKiids btnConfirm" listener="#{exampleBean.openKiid(index)}" onsuccess="window.open('#{exampleBean.url}')"/>
+				</p:selectBooleanCheckbox>
+				<p:outputLabel value="#{index}"/>
+			</p:column>
+
+		</p:dataTable>
+		<p:commandButton id="btnConfirm" value="Conferma" disabled="#{exampleBean.btnConfirmCheck}"/>
+	</h:form>
+</h:body>
+</html>
