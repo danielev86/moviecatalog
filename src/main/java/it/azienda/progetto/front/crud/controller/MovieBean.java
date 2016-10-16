@@ -1,4 +1,4 @@
-package it.azienda.progetto.crud.bean;
+package it.azienda.progetto.front.crud.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -42,9 +42,12 @@ public class MovieBean implements Serializable {
 	@ManagedProperty(value="#{starService}")
 	private StarService starService;
 	
+	private String url;
+	
 	@PostConstruct
 	public void movieInitializer(){
 		movie = new MovieDTOImpl();
+		url="";
 		stars = new HashSet<>();
 		directors = new HashSet<>();
 		countries = new ArrayList<>();
@@ -123,6 +126,21 @@ public class MovieBean implements Serializable {
 	}
 	public void onTabChange(TabChangeEvent event){
 		
+	}
+	
+	
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public void refreshPoster(){
+		System.out.println(this.movie.getPoster());
+
 	}
 	
 	

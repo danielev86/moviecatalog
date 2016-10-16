@@ -1,4 +1,4 @@
-package it.azienda.progetto.bean.controller.menu;
+package it.azienda.progetto.front.menu.controller;
 
 import java.io.Serializable;
 import java.util.Locale;
@@ -11,10 +11,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import it.azienda.progetto.bean.controller.login.LoginBean;
 import it.azienda.progetto.common.utils.UtilityFunction;
-import it.azienda.progetto.common.utils.bean.InfoLanguage;
+import it.azienda.progetto.common.utils.controller.InfoLanguage;
 import it.azienda.progetto.dto.UserDTO;
+import it.azienda.progetto.front.login.controller.LoginBean;
 
 @ManagedBean(name = "langApplication")
 @SessionScoped

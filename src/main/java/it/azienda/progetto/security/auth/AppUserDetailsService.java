@@ -19,8 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.azienda.progetto.bean.controller.login.LoginBean;
 import it.azienda.progetto.common.utils.UtilityFunction;
+import it.azienda.progetto.front.login.controller.LoginBean;
 import it.azienda.progetto.hibernate.bean.User;
 import it.azienda.progetto.hibernate.dao.UserDAO;
 @Service("AppUserDetailsService")

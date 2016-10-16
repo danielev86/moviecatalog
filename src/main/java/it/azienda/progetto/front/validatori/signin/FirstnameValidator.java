@@ -1,4 +1,4 @@
-package it.azienda.progetto.validatori.signin;
+package it.azienda.progetto.front.validatori.signin;
 
 import java.util.regex.Pattern;
 

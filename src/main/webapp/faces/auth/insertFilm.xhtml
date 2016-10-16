@@ -16,7 +16,7 @@
 					<p:panelGrid columns="2" styleClass="transparentBackground">
 						<p:panelGrid styleClass="transparentBackground">
 							<p:graphicImage alt="#{msg['label.insertfilm.noposter']}"
-								url="#{movieBean.movie.poster}" id="imagePoster" />
+								url="#{movieBean.movie.poster}" id="imagePoster" width="100%" height="100%" />
 						</p:panelGrid>
 						<p:panelGrid styleClass="transparentBackground" columns="1">
 							<p:outputLabel value="#{msg['label.insertfilm.country']}" />
@@ -39,12 +39,13 @@
 					<p:panelGrid columns="1" styleClass="transparentBackground">
 						<p:outputLabel value="#{msg['label.insertfilm.movieurl']}" />
 						<h:panelGrid columns="2">
-							<p:inputText value="#{movieBean.movie.poster}" required="true" requiredMessage="#{msg['error.insertfilm.url']}"/>
-							<p:commandButton value="#{msg['label.insertfilm.refresh']}"
-								update="imagePoster" required="true" />
+							<p:inputText value="#{movieBean.movie.poster}" required="true" requiredMessage="#{msg['error.insertfilm.url']}">
+								<p:ajax process="@this" update="@this imagePoster" listener="#{movieBean.refreshPoster()}"/>
+							</p:inputText>
+<!-- 							<p:commandButton value="#{msg['label.insertfilm.refresh']}" process="@form" update="@form" immediate="true" action="#{movieBean.refreshPoster()}" ajax="false"/> -->
 						</h:panelGrid>
 						<p:outputLabel value="#{msg['label.insertfilm.company']}" />
-						<p:inputText value="#{movieBean.movie.company}" required="true" requiredMessage="#{msg['error.insertfilm.company']}"/>
+						<p:inputText value="#{movieBean.movie.company.companyName}" required="true" requiredMessage="#{msg['error.insertfilm.company']}"/>
 						<p:outputLabel value="#{msg['label.insertfilm.title']}" />
 						<p:inputText value="#{movieBean.movie.title}"  required="true" requiredMessage="#{msg['error.insertfilm.title']}"/>
 						<p:outputLabel value="#{msg['label.insertfilm.plot']}" />

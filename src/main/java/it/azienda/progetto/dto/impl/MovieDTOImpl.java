@@ -27,6 +27,7 @@ public class MovieDTOImpl implements MovieDTO, Serializable {
 	private Set<CountryDTO> countries;
 	
 	public MovieDTOImpl (){
+		company = new CompanyDTOImpl();
 		ratings = new HashSet<>();
 		genres = new HashSet<>();
 		directors = new HashSet<>();

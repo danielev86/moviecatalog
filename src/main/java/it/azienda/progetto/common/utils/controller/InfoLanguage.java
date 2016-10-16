@@ -1,4 +1,4 @@
-package it.azienda.progetto.common.utils.bean;
+package it.azienda.progetto.common.utils.controller;
 
 import java.io.Serializable;
 

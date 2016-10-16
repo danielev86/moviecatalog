@@ -1,4 +1,4 @@
-package it.azienda.progetto.validatori.star;
+package it.azienda.progetto.front.validatori.star;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;

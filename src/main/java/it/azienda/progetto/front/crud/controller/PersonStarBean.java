@@ -1,4 +1,4 @@
-package it.azienda.progetto.crud.bean;
+package it.azienda.progetto.front.crud.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package it.azienda.progetto.bean.controller.login;
+package it.azienda.progetto.front.login.controller;
 
 import java.io.IOException;
 import java.io.Serializable;

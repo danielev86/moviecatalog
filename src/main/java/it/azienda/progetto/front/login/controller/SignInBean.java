@@ -1,4 +1,4 @@
-package it.azienda.progetto.bean.controller.login;
+package it.azienda.progetto.front.login.controller;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;

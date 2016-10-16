@@ -13,7 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
-import it.azienda.progetto.common.utils.bean.InfoLanguage;
+import it.azienda.progetto.common.utils.controller.InfoLanguage;
 
 public class UtilityFunction {
 	

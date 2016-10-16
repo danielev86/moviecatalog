@@ -1,4 +1,4 @@
-package it.azienda.progetto.validatori.login;
+package it.azienda.progetto.front.validatori.login;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
